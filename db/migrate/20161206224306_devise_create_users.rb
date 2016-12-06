@@ -7,6 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
 	  t.string :first_name,			null: true
 	  t.string :last_name, 			null: true
 	  t.string :display_name, 		null: false, default: ""
+	  t.string :gender,				null: true
 	  t.datetime :date_of_birth, 	null: true
 
       ## Recoverable

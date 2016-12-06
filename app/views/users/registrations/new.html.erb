@@ -9,6 +9,21 @@
   </div>
 
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %><br />
+	<%= f.label :last_name %><br />
+	<%= f.text_field :last_name %><br />
+	<%= f.label :display_name %><br />
+	<%= f.text_field :display_name %><br />
+	<%= f.radio_button :gender, 'Male' %>
+ 	<%= label :gender_male, 'Male' %>
+ 	<%= f.radio_button :gender, 'Female' %>
+ 	<%= label :gender_female, 'Female' %><br />
+	<%= f.label :date_of_birth %><br />
+	<%= f.date_select :date_of_birth, start_year: 1910, end_year: Date.today.year - 5, order: [:month, :day, :year], default: { day: 12, month: 9, year: 1991 } %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20161206224306) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "display_name",           default: "", null: false
+    t.string   "gender"
     t.datetime "date_of_birth"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
