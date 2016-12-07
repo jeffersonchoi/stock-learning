@@ -68,7 +68,7 @@ class StocksController < ApplicationController
 protected
 
 	def find_stocks
-		@stocks = Stock.all
+		@stocks = Stock.all.order(name: :asc)
 	end
 
 	def find_stock
