@@ -1,8 +1,9 @@
 class StocksController < ApplicationController
 
-	def index
+	before_action :find_stocks
+	before_action :find_stock, except: [:index]
 
-		@stocks = Stock.all
+	def index
 
 		respond_to do |format|
 			format.html
@@ -15,13 +16,15 @@ class StocksController < ApplicationController
 
 		begin
 
-			@stock = Stock.find_by_symbol(params[:symbol].downcase)
+			stock = Stock.search_quote params[:symbol].downcase
 
-			unless @stock
+			if @stock
 
-				stock = Stock.search_quote params[:symbol].downcase
+				@stock.update(stock)
 
-				raise ArgumentError if stock[:name] == "N/A"
+			else
+
+				raise ArgumentError, "Unable to find #{params[:symbol]}" if stock[:name] == "N/A"
 
 				@stock = Stock.create(stock)
 
@@ -32,9 +35,9 @@ class StocksController < ApplicationController
 				format.json {render :json => @stock}
 			end
 
-		rescue ArgumentError
+		rescue ArgumentError => e
 
-			flash[:error] = "Unable to find #{params[:symbol]}"
+			flash[:error] = e
 			redirect_to action: :index
 
 		end
@@ -45,22 +48,32 @@ class StocksController < ApplicationController
 
 		begin
 
-			@stock = Stock.find_by_symbol(params[:symbol].downcase)
 			stock = Stock.search_quote params[:symbol].downcase
 
-			raise ArgumentError if stock[:name] == "N/A"
+			raise ArgumentError, "Unable to find #{params[:symbol]}" if stock[:name] == "N/A"
 
 			@stock.present? ? @stock.update(stock) : @stock = Stock.create(stock)
 
 			redirect_to action: :show, symbol: @stock.symbol
 
-		rescue ArgumentError
+		rescue ArgumentError => e
 
-			flash[:error] = "Unable to find #{params[:symbol]}"
+			flash[:error] = e
 			redirect_to action: :index
 
 		end
 
 	end
+
+protected
+
+	def find_stocks
+		@stocks = Stock.all
+	end
+
+	def find_stock
+		@stock = Stock.find_by_symbol(params[:symbol].downcase)
+	end
+
 
 end
