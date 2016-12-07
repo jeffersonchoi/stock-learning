@@ -13,6 +13,7 @@ class Stock < ApplicationRecord
 			stock_info[:change] = qt.change
 			stock_info[:change_points] = qt.changePoints
 			stock_info[:change_percents] = qt.changePercent
+			stock_info[:previous_close] = qt.previousClose
 			stock_info[:open] = qt.open
 			stock_info[:day_high] = qt.dayHigh
 			stock_info[:day_low] = qt.dayLow

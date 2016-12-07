@@ -1,1 +1,93 @@
-<%= @stock.inspect %>
+<div class="container text-center">
+
+	<div class="row">
+		<div class="col-md-6">
+			<label>Name</label>
+			<%= @stock.name %>
+		</div>
+		<div class="col-md-6">
+			<label>Symbol</label>
+			<%= @stock.symbol %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<label>Last Trade</label>
+			<%= @stock.last_trade %>
+		</div>
+		<div class="col-md-4">
+			<label>Date</label>
+			<%= @stock.date %>
+		</div>
+		<div class="col-md-4">
+			<label>Time</label>
+			<%= @stock.time %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<label>Change</label>
+			<%= @stock.change %>
+		</div>
+		<div class="col-md-4">
+			<label>Change Points</label>
+			<%= @stock.change_points %>
+		</div>
+		<div class="col-md-4">
+			<label>Change Percents</label>
+			<%= @stock.change_percents %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<label>Previous Close</label>
+			<%= @stock.previous_close %>
+		</div>
+		<div class="col-md-4">
+			<label>Open</label>
+			<%= @stock.open %>
+		</div>
+		<div class="col-md-4">
+			<label>Day High</label>
+			<%= @stock.day_high %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<label>Day Low</label>
+			<%= @stock.day_low %>
+		</div>
+		<div class="col-md-4">
+			<label>Volume</label>
+			<%= @stock.volume %>
+		</div>
+		<div class="col-md-4">
+			<label>Day Range</label>
+			<%= @stock.day_range %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<label>Last Trade With Time</label>
+			<%= @stock.last_trade_with_time %>
+		</div>
+		<div class="col-md-4">
+			<label>Ticker Trend</label>
+			<%= @stock.ticker_trend %>
+		</div>
+		<div class="col-md-4">
+			<label>Average Daily Volume</label>
+			<%= @stock.average_daily_volume %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<label>Bid</label>
+			<%= @stock.bid %>
+		</div>
+		<div class="col-md-4">
+			<label>Ask</label>
+			<%= @stock.ask %>
+		</div>
+	</div>
+</div>
