@@ -1,3 +1,34 @@
-<%= @user.inspect %>
+<div class="container text-center">
 
-<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+	<div class="row">
+		<div class="col-md-4">
+			<label>First Name</label>
+			<%= @user.first_name %>
+		</div>
+		<div class="col-md-4">
+			<label>Last Name</label>
+			<%= @user.last_name %>
+		</div>
+		<div class="col-md-4">
+			<label>Display Name</label>
+			<%= @user.display_name %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<label>Date of Birth</label>
+			<%= @user.date_of_birth %>
+		</div>
+		<div class="col-md-4">
+			<label>Email</label>
+			<%= @user.email %>
+		</div>
+		<div class="col-md-4">
+			<label>Registration Date</label>
+			<%= @user.created_at %>
+		</div>
+	</div>
+
+	<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+
+</div>
