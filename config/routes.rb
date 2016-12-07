@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 	resources :stocks, :only => [:index]
 
 	get 'stocks/quote_search' => 'stocks#quote_search', :as => 'quote_search'
-	get 'stocks/:symbol' => 'stocks#show'
+	get 'stocks/:symbol' => 'stocks#show', :as => 'stock'
 
 end

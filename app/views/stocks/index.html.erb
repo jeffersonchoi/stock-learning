@@ -10,7 +10,7 @@
 	</tr>
 
 	<% @stocks.each do |stock| %>
-		<tr>
+		<tr data-link="<%= stock_path(stock.symbol) %>">
 			<td><%= stock.name %></td>
 			<td><%= stock.symbol %></td>
 			<td><%= stock.last_trade %></td>
