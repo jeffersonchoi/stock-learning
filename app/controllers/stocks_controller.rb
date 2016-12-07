@@ -13,23 +13,53 @@ class StocksController < ApplicationController
 
 	def show
 
-		@stock = Stock.find(params[:id])
+		begin
 
-		respond_to do |format|
-			format.html
-			format.json {render :json => @stock}
+			@stock = Stock.find_by_symbol(params[:symbol].downcase)
+
+			unless @stock
+
+				stock = Stock.search_quote params[:symbol].downcase
+
+				raise ArgumentError if stock[:name] == "N/A"
+
+				@stock = Stock.create(stock)
+
+			end
+
+			respond_to do |format|
+				format.html
+				format.json {render :json => @stock}
+			end
+
+		rescue ArgumentError
+
+			flash[:error] = "Unable to find #{params[:symbol]}"
+			redirect_to action: :index
+
 		end
 
 	end
 
 	def quote_search
 
-		@stock = Stock.find_by_symbol(params[:symbol].downcase)
-		stock = Stock.search_quote params[:symbol].downcase
+		begin
 
-		@stock.present? ? @stock.update(stock) : @stock = Stock.create(stock)
+			@stock = Stock.find_by_symbol(params[:symbol].downcase)
+			stock = Stock.search_quote params[:symbol].downcase
 
-		redirect_to action: :show, id: @stock.id
+			raise ArgumentError if stock[:name] == "N/A"
+
+			@stock.present? ? @stock.update(stock) : @stock = Stock.create(stock)
+
+			redirect_to action: :show, symbol: @stock.symbol
+
+		rescue ArgumentError
+
+			flash[:error] = "Unable to find #{params[:symbol]}"
+			redirect_to action: :index
+
+		end
 
 	end
 
