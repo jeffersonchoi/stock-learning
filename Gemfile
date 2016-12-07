@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # User management
 gem 'devise'
 
+# Stock
+gem "yahoofinance"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
