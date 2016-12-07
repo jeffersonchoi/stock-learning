@@ -1,5 +1,16 @@
 class StocksController < ApplicationController
 
+	def index
+
+		@stocks = Stock.all
+
+		respond_to do |format|
+			format.html
+			format.json {render :json => @stocks}
+		end
+
+	end
+
 	def show
 
 		@stock = Stock.find(params[:id])
@@ -13,8 +24,8 @@ class StocksController < ApplicationController
 
 	def quote_search
 
-		@stock = Stock.find_by_symbol(params[:symbol])
-		stock = Stock.search_quote params[:symbol]
+		@stock = Stock.find_by_symbol(params[:symbol].downcase)
+		stock = Stock.search_quote params[:symbol].downcase
 
 		@stock.present? ? @stock.update(stock) : @stock = Stock.create(stock)
 
