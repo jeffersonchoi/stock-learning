@@ -1,4 +1,23 @@
-<% @stocks.each do |stock| %>
-	<%= stock.symbol %>
-	<%= stock.bid %>
-<% end %>
+<table class="table table-striped">
+	<tr>
+		<th>Name</th>
+		<th>Symbol</th>
+		<th>Last Trade</th>
+		<th>Change</th>
+		<th>Volume</th>
+		<th>Bid</th>
+		<th>Ask</th>
+	</tr>
+
+	<% @stocks.each do |stock| %>
+		<tr>
+			<td><%= stock.name %></td>
+			<td><%= stock.symbol %></td>
+			<td><%= stock.last_trade %></td>
+			<td><%= stock.change %></td>
+			<td><%= stock.volume %></td>
+			<td><%= stock.bid %></td>
+			<td><%= stock.ask %></td>
+		</tr>
+	<% end %>
+</table>
