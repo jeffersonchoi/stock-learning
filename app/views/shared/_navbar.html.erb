@@ -13,14 +13,12 @@
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <!-- <ul class="nav navbar-nav">
-		    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-		    <li><a href="#">Link</a></li>
-		  </ul> -->
+			<ul class="nav navbar-nav">
+				<li><%= link_to("Stock Lists", stocks_path) %></li>
+			</ul>
 			<%= form_tag(quote_search_path, method: :get, class: "navbar-form navbar-left") do %>
 					<div class="form-group">
 						<%= text_field_tag :symbol, params[:symbol], placeholder: "Search stock with quote.", class: 'form-control' %>
-						<!-- <input type="text" class="form-control" placeholder="Search"> -->
 					</div>
 					<%= submit_tag "Search", class: 'btn btn-default' %>
 			<% end %>
@@ -37,6 +35,10 @@
 						<li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 					</ul>
 					</li>
+				</ul>
+			<% else %>
+				<ul class="nav navbar-nav navbar-right">
+					<li><%= link_to("Login", new_user_session_path) %></li>
 				</ul>
 			<% end %>
 		</div><!-- /.navbar-collapse -->
