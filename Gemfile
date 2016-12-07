@@ -37,6 +37,9 @@ gem 'devise'
 # Stock
 gem "yahoofinance"
 
+# Make Color
+"colorize"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
