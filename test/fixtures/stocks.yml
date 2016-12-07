@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  symbol: MyString
+  name: MyString
+  last_trade: 9.99
+  date: 2016-12-06 18:14:46
+  time: 2016-12-06 18:14:46
+  change: MyString
+  change_points: 9.99
+  change_percents: 9.99
+  previous_close: 9.99
+  open: 9.99
+  day_high: 9.99
+  day_low: 9.99
+  volume: 9.99
+  day_range: MyString
+  last_trade_with_time: MyString
+  ticker_trend: MyString
+  average_daily_volume: 9.99
+  bid: 9.99
+  ask: 9.99
+
+two:
+  symbol: MyString
+  name: MyString
+  last_trade: 9.99
+  date: 2016-12-06 18:14:46
+  time: 2016-12-06 18:14:46
+  change: MyString
+  change_points: 9.99
+  change_percents: 9.99
+  previous_close: 9.99
+  open: 9.99
+  day_high: 9.99
+  day_low: 9.99
+  volume: 9.99
+  day_range: MyString
+  last_trade_with_time: MyString
+  ticker_trend: MyString
+  average_daily_volume: 9.99
+  bid: 9.99
+  ask: 9.99
