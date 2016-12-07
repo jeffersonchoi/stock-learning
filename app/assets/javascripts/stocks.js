@@ -1,6 +1,3 @@
-$(document).ready(function() {
-	$("tr[data-link]").click(function() {
-		console.log("clicked")
-		window.location = $(this).data("link")
-	})
+$(document).on("click", "tr[data-link]", function() {
+	window.location = $(this).data("link")
 });
