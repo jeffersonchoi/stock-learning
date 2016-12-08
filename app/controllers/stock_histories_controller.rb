@@ -2,7 +2,7 @@ class StockHistoriesController < ApplicationController
 
 	def generate_history
 
-		@stock_history = StockHistory.where(stock_id: params[:stock_id])
+		@stock_history = StockHistory.where(stock_id: params[:stock_id]).order(date: :asc)
 
 		day_range = if @stock_history.present?
 			if (Date.today - @stock_history.order(:date).last.date.to_date).to_i == 1
@@ -21,13 +21,25 @@ class StockHistoriesController < ApplicationController
 			if @stock_history.count == 0
 
 				@new_stock_history = StockHistory.create(v)
-				@stock_history = StockHistory.where(stock_id: params[:stock_id])
+				@stock_history = StockHistory.where(stock_id: params[:stock_id]).order(date: :asc)
 
 			else
 
-				@previous_stock_history_id = @stock_history.last.id.to_i
+				if @stock_history.count == 1
+
+					@previous_stock_history_id = @stock_history.last.id.to_i
+
+				else
+
+					@previous_stock_history_id = @stock_history.last.previous.id.to_i
+
+				end
 
 				next if v[:date].to_date == @stock_history.last.date.to_date
+
+				puts "WTF".red
+				puts v[:date].to_date
+				puts @stock_history.last.date.to_date
 
 				@new_stock_history = StockHistory.new(v)
 
