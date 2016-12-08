@@ -18,24 +18,32 @@ class StockHistoriesController < ApplicationController
 
 		stock_histories.each do |k, v|
 
-			if StockHistory.count == 0
+			if @stock_history.count == 0
+
 				@new_stock_history = StockHistory.create(v)
+				@stock_history = StockHistory.where(stock_id: params[:stock_id])
+
 			else
+
 				@previous_stock_history_id = @stock_history.last.id.to_i
+
 				next if v[:date].to_date == @stock_history.last.date.to_date
+
 				@new_stock_history = StockHistory.new(v)
+
+				previous_stock_close_price = StockHistory.find(@previous_stock_history_id).adjusted_close
+
+				case
+				when @new_stock_history.adjusted_close > previous_stock_close_price
+					@new_stock_history.trend = "up"
+				when @new_stock_history.adjusted_close < previous_stock_close_price
+					@new_stock_history.trend = "down"
+				when @new_stock_history.adjusted_close == previous_stock_close_price
+					@new_stock_history.trend = "unchange"
+				end
+
 			end
 
-			previous_stock_close_price = StockHistory.find(@previous_stock_history_id).adjusted_close
-			
-			case
-			when @new_stock_history.adjusted_close > previous_stock_close_price
-				@new_stock_history.trend = "up"
-			when @new_stock_history.adjusted_close < previous_stock_close_price
-				@new_stock_history.trend = "down"
-			when @new_stock_history.adjusted_close == previous_stock_close_price
-				@new_stock_history.trend = "unchange"
-			end
 
 			@new_stock_history.save
 
