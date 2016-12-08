@@ -47,6 +47,10 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Set timezone
+  config.time_zone = "Pacific Time (US & Canada)"
+  config.active_record.default_timezone = :local
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
