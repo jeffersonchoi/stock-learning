@@ -24,7 +24,7 @@ class StockHistory < ApplicationRecord
 
 		end
 
-		stock_history
+		stock_history.to_a.reverse.to_h
 
 	end
 
