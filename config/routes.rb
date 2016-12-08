@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+	root 'stocks#index'
+
 	devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'sign_up' }
 	resources :users, :only => [:show]
 	resources :stocks, :only => [:index]
