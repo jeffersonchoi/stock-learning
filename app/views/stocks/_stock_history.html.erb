@@ -2,6 +2,7 @@
 	<table class="table table-striped">
 		<tr>
 			<th>Symbol</th>
+			<th>Date</th>
 			<th>Open</th>
 			<th>High</th>
 			<th>Low</th>
@@ -11,9 +12,10 @@
 			<th>Trend</th>
 		</tr>
 
-		<% @stock_history.each do |stock_history| %>
+		<% @stock_histories.each do |stock_history| %>
 			<tr>
 				<td><%= @stock.symbol %></td>
+				<td><%= stock_history.date.to_date %></td>
 				<td><%= stock_history.open %></td>
 				<td><%= stock_history.high %></td>
 				<td><%= stock_history.low %></td>
@@ -23,5 +25,7 @@
 				<td><%= stock_history.trend %></td>
 			</tr>
 		<% end %>
+		<%= will_paginate(@stock_histories) %>
 	</table>
+
 </div>
