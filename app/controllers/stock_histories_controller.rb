@@ -2,12 +2,14 @@ class StockHistoriesController < ApplicationController
 
 	def generate_history
 
-		@stock_history = StockHistory.find_by_stock_id(params[:stock_id])
+		@stock_history = StockHistory.where(stock_id: params[:stock_id])
 
 		day_range = if @stock_history.present?
-
-			(Date.today - StockHistory.order(:date).last.date.to_date).to_i == 1 ? 0 : (Date.today - StockHistory.order(:date).last.date.to_date).to_i
-
+			if (Date.today - @stock_history.order(:date).last.date.to_date).to_i == 1
+				0
+			else
+				(Date.today - @stock_history.order(:date).last.date.to_date).to_i
+			end
 		else
 			360
 		end
@@ -16,20 +18,26 @@ class StockHistoriesController < ApplicationController
 
 		stock_histories.each do |k, v|
 
-			@stock_history = StockHistory.create(v)
-			if StockHistory.count > 1
-				previous_stock_history_id = @stock_history[:id].to_i - 1
-				previous_stock_close_price = StockHistory.find(previous_stock_history_id).adjusted_close
-				case
-				when @stock_history.adjusted_close > previous_stock_close_price
-					@stock_history.trend = "up"
-				when @stock_history.adjusted_close < previous_stock_close_price
-					@stock_history.trend = "down"
-				when @stock_history.adjusted_close == previous_stock_close_price
-					@stock_history.trend = "unchange"
-				end
+			if StockHistory.count == 0
+				@new_stock_history = StockHistory.create(v)
+			else
+				@previous_stock_history_id = @stock_history.last.id.to_i
+				next if v[:date].to_date == @stock_history.last.date.to_date
+				@new_stock_history = StockHistory.new(v)
 			end
-			@stock_history.save
+
+			previous_stock_close_price = StockHistory.find(@previous_stock_history_id).adjusted_close
+			
+			case
+			when @new_stock_history.adjusted_close > previous_stock_close_price
+				@new_stock_history.trend = "up"
+			when @new_stock_history.adjusted_close < previous_stock_close_price
+				@new_stock_history.trend = "down"
+			when @new_stock_history.adjusted_close == previous_stock_close_price
+				@new_stock_history.trend = "unchange"
+			end
+
+			@new_stock_history.save
 
 		end
 
