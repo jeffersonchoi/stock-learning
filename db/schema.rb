@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207021446) do
+ActiveRecord::Schema.define(version: 20161208051320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stock_histories", force: :cascade do |t|
+    t.integer  "stock_id"
+    t.datetime "date"
+    t.decimal  "open"
+    t.decimal  "high"
+    t.decimal  "low"
+    t.decimal  "close"
+    t.decimal  "volume"
+    t.decimal  "adjusted_close"
+    t.string   "trend"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["stock_id"], name: "index_stock_histories_on_stock_id", using: :btree
+  end
 
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
@@ -61,4 +76,5 @@ ActiveRecord::Schema.define(version: 20161207021446) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "stock_histories", "stocks"
 end
