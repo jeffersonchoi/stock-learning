@@ -30,6 +30,8 @@ class StocksController < ApplicationController
 
 			end
 
+			@stock_history = @stock.stock_histories
+
 			respond_to do |format|
 				format.html
 				format.json {render :json => @stock}
