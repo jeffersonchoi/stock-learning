@@ -33,7 +33,17 @@ class StocksController < ApplicationController
 
 	def generate_suggestion
 
-		StockAnalyze.generate_suggestion params[:stock_id], params[:analyze_type_id]
+		begin
+
+			StockAnalyze.generate_suggestion params[:stock_id], params[:analyze_type_id]
+
+		rescue NoMethodError => e
+
+			puts 'im not here'
+
+			flash[:error] = "We are currently not giving recommendation on this stock. Sorry for any inconvenience."
+
+		end
 
 		redirect_back(fallback_location: stock_path(params[:symbol]))
 

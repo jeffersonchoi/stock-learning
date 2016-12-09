@@ -46,6 +46,9 @@ gem "colorize"
 # Machine Learning
 gem "decisiontree"
 
+# Parse time
+gem "chronic"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

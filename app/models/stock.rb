@@ -10,8 +10,8 @@ class Stock < ApplicationRecord
 			stock_info[:symbol] = qt.symbol
 			stock_info[:name] = qt.name
 			stock_info[:last_trade] = qt.lastTrade
-			stock_info[:date] = qt.date
-			stock_info[:time] = qt.time
+			stock_info[:date] = Chronic.parse(qt.date)
+			stock_info[:time] = Chronic.parse(qt.time)
 			stock_info[:change] = qt.change
 			stock_info[:change_points] = qt.changePoints
 			stock_info[:change_percents] = qt.changePercent
@@ -21,7 +21,7 @@ class Stock < ApplicationRecord
 			stock_info[:day_low] = qt.dayLow
 			stock_info[:volume] = qt.volume
 			stock_info[:day_range] = qt.dayRange
-			stock_info[:last_trade_with_time] = qt.lastTradeWithTime
+			stock_info[:last_trade_with_time] = Chronic.parse(qt.lastTradeWithTime)
 			stock_info[:ticker_trend] = qt.tickerTrend
 			stock_info[:average_daily_volume] = qt.averageDailyVolume
 			stock_info[:bid] = qt.bid

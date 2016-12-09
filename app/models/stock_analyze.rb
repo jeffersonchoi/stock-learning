@@ -7,7 +7,8 @@ class StockAnalyze < ApplicationRecord
 		attributes = ["open", "high", "low", "close", "volume", "adjusted_close", "trend"]
 		training = []
 		decision, date = nil
-		Stock.find(stock_id).stock_histories.each do |stock_history|
+		@stock = Stock.find(stock_id)
+		@stock.stock_histories.each do |stock_history|
 
 			if stock_history.next
 
@@ -37,7 +38,7 @@ class StockAnalyze < ApplicationRecord
 				dec_tree = DecisionTree::ID3Tree.new(
 					attributes,
 					training,
-					'hold',
+					"buy",
 					open: :continuous,
 					high: :continuous,
 					low: :continuous,
