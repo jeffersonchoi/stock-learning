@@ -1,6 +1,7 @@
 class Stock < ApplicationRecord
 
 	has_many :stock_histories
+	has_many :stock_analyzes
 
 	def self.search_quote symbol
 		quote_type = YahooFinance::StandardQuote
