@@ -2,7 +2,7 @@ class StockAnalyze < ApplicationRecord
 	belongs_to :stock
 	belongs_to :analyze_type
 
-	def self.generate_recommendation stock_id, analyze_type_id
+	def self.generate_suggestion stock_id, analyze_type_id
 
 		attributes = ["open", "high", "low", "close", "volume", "adjusted_close", "trend"]
 		training = []

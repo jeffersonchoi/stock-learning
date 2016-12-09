@@ -1,7 +1,7 @@
 class StocksController < ApplicationController
 
-	before_action :find_stocks
-	before_action :find_stock, except: [:index]
+	before_action :find_stocks, except: [:generate_suggestion]
+	before_action :find_stock, except: [:index, :generate_suggestion]
 
 	def index
 
@@ -16,6 +16,8 @@ class StocksController < ApplicationController
 
 		@stock_histories = @stock.stock_histories.order(date: :desc).all.paginate(page: params[:page], per_page: 10)
 
+		@stock_suggestion = @stock.stock_analyzes.order(date: :desc).first
+
 		respond_to do |format|
 			format.html
 			format.json {render :json => @stock}
@@ -26,6 +28,14 @@ class StocksController < ApplicationController
 	def quote_search
 
 		redirect_to action: :show, symbol: @stock.symbol
+
+	end
+
+	def generate_suggestion
+
+		StockAnalyze.generate_suggestion params[:stock_id], params[:analyze_type_id]
+
+		redirect_back(fallback_location: stock_path(params[:symbol]))
 
 	end
 
