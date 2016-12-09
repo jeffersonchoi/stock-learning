@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208051320) do
+ActiveRecord::Schema.define(version: 20161209055843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "analyze_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stock_analyzes", force: :cascade do |t|
+    t.integer  "stock_id"
+    t.integer  "analyze_type_id"
+    t.string   "suggestion"
+	t.datetime "date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["analyze_type_id"], name: "index_stock_analyzes_on_analyze_type_id", using: :btree
+    t.index ["stock_id"], name: "index_stock_analyzes_on_stock_id", using: :btree
+  end
 
   create_table "stock_histories", force: :cascade do |t|
     t.integer  "stock_id"
@@ -76,5 +93,7 @@ ActiveRecord::Schema.define(version: 20161208051320) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "stock_analyzes", "analyze_types"
+  add_foreign_key "stock_analyzes", "stocks"
   add_foreign_key "stock_histories", "stocks"
 end

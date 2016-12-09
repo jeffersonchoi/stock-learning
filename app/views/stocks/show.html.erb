@@ -1,8 +1,13 @@
 <div class="container text-center">
 
 	<div class="row">
-		<%= link_to "generate_history", generate_history_path(:stock_id => @stock.id), class: "btn btn-default" %>
+		<%= link_to "Generate History", generate_history_path(:stock_id => @stock.id), class: "btn btn-default" %>
 	</div>
+	<% if @stock_histories.count > 0 %>
+		<div class="row">
+			<%= link_to "Generate Day Trade Suggestion", generate_suggestion_path(:stock_id => @stock.id, :analyze_type_id => 1), class: "btn btn-default" %>
+		</div>
+	<% end %>
 
 	<div class="row">
 		<div class="col-md-6">
@@ -95,6 +100,10 @@
 		</div>
 	</div>
 </div>
+<% if @stock_suggestion %>
+	<%= render partial: "stocks/stock_suggestion" %>
+<% end %>
+
 <% if @stock_histories.count > 0 %>
 	<%= render partial: "stocks/stock_history" %>
 <% end %>

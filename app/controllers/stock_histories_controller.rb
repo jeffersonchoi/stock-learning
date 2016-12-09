@@ -25,21 +25,11 @@ class StockHistoriesController < ApplicationController
 
 			else
 
-				if @stock_history.count == 1
 
-					@previous_stock_history_id = @stock_history.last.id.to_i
-
-				else
-
-					@previous_stock_history_id = @stock_history.last.previous.id.to_i
-
-				end
+				@previous_stock_history_id = @stock_history.last.id.to_i
 
 				next if v[:date].to_date == @stock_history.last.date.to_date
 
-				puts "WTF".red
-				puts v[:date].to_date
-				puts @stock_history.last.date.to_date
 
 				@new_stock_history = StockHistory.new(v)
 
