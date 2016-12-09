@@ -30,6 +30,8 @@ class StocksController < ApplicationController
 
 			end
 
+			@stock_histories = @stock.stock_histories.order(date: :desc).all.paginate(page: params[:page], per_page: 10)
+
 			respond_to do |format|
 				format.html
 				format.json {render :json => @stock}

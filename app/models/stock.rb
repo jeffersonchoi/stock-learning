@@ -1,10 +1,11 @@
 class Stock < ApplicationRecord
 
+	has_many :stock_histories
+
 	def self.search_quote symbol
 		quote_type = YahooFinance::StandardQuote
-		quote_symbols = symbol
 		stock_info = {}
-		YahooFinance::get_quotes( quote_type, quote_symbols ) do |qt|
+		YahooFinance::get_quotes( quote_type, symbol ) do |qt|
 			stock_info[:symbol] = qt.symbol
 			stock_info[:name] = qt.name
 			stock_info[:last_trade] = qt.lastTrade
