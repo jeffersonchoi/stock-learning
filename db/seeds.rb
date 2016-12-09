@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+analyze_type_hash = [
+	{name: "Daily"},
+	{name: "Weekly"},
+	{name: "Monthly"},
+	{name: "Quarterly"},
+	{name: "Yearly"}
+]
+
+analyze_type_hash.each do |h|
+	AnalyzeType.find_or_create_by(h)
+end
