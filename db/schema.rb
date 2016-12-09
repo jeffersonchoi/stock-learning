@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20161209055843) do
     t.integer  "stock_id"
     t.integer  "analyze_type_id"
     t.string   "suggestion"
+	t.datetime "date"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["analyze_type_id"], name: "index_stock_analyzes_on_analyze_type_id", using: :btree

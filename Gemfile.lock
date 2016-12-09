@@ -57,6 +57,7 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
+    decisiontree (0.5.0)
     devise (4.2.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -180,6 +181,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   colorize
+  decisiontree
   devise
   jbuilder (~> 2.5)
   jquery-rails
