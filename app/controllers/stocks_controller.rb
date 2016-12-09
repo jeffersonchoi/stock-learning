@@ -14,6 +14,31 @@ class StocksController < ApplicationController
 
 	def show
 
+		@stock_histories = @stock.stock_histories.order(date: :desc).all.paginate(page: params[:page], per_page: 10)
+
+		respond_to do |format|
+			format.html
+			format.json {render :json => @stock}
+		end
+
+	end
+
+	def quote_search
+
+		redirect_to action: :show, symbol: @stock.symbol
+
+	end
+
+protected
+
+	def find_stocks
+		@stocks = Stock.all.order(name: :asc)
+	end
+
+	def find_stock
+
+		@stock = Stock.find_by_symbol(params[:symbol].downcase)
+
 		begin
 
 			stock = Stock.search_quote params[:symbol].downcase
@@ -30,13 +55,6 @@ class StocksController < ApplicationController
 
 			end
 
-			@stock_histories = @stock.stock_histories.order(date: :desc).all.paginate(page: params[:page], per_page: 10)
-
-			respond_to do |format|
-				format.html
-				format.json {render :json => @stock}
-			end
-
 		rescue ArgumentError => e
 
 			flash[:error] = e
@@ -44,37 +62,7 @@ class StocksController < ApplicationController
 
 		end
 
-	end
 
-	def quote_search
-
-		begin
-
-			stock = Stock.search_quote params[:symbol].downcase
-
-			raise ArgumentError, "Unable to find #{params[:symbol]}" if stock[:name] == "N/A"
-
-			@stock.present? ? @stock.update(stock) : @stock = Stock.create(stock)
-
-			redirect_to action: :show, symbol: @stock.symbol
-
-		rescue ArgumentError => e
-
-			flash[:error] = e
-			redirect_to action: :index
-
-		end
-
-	end
-
-protected
-
-	def find_stocks
-		@stocks = Stock.all.order(name: :asc)
-	end
-
-	def find_stock
-		@stock = Stock.find_by_symbol(params[:symbol].downcase)
 	end
 
 
